@@ -2,6 +2,7 @@ package EventManagement;
 
 import java.time.LocalDate;
 import java.util.Dictionary;
+import java.util.Hashtable;
 
 class Event {
 	// Main members of the event
@@ -33,24 +34,24 @@ class Event {
 			Dictionary<String, Long> sponsers, Dictionary<String, Long> participants) {
 
 		// Calling various private methods
-		getCastMembers(organizer, cooganiser, members);
-		getDateDetails(firstDateofRegistration, lastDateofRegistration, firstDateofEvent, lastDateofEvent);
-		getEventDetails(eventName, eventDescription, eventPriceDetails, eventPricePerPerson, maxParticipants);
-		getParticipantsDetails(sponsers, participants);
+		setCastMembers(organizer, cooganiser, members);
+		setDateDetails(firstDateofRegistration, lastDateofRegistration, firstDateofEvent, lastDateofEvent);
+		setEventDetails(eventName, eventDescription, eventPriceDetails, eventPricePerPerson, maxParticipants);
+		setParticipantsDetails(sponsers, participants);
 	}
 
 	public Event() {
 	}
 
 	// 1: Get the cast details
-	protected void getCastMembers(String organizer, String cooganiser, String[] members) {
+	protected void setCastMembers(String organizer, String cooganiser, String[] members) {
 		this.organizer = organizer;
 		this.cooganiser = cooganiser;
 		this.members = members.clone();
 	}
 
 	// 2: Get the info about dates
-	protected void getDateDetails(String firstDateofRegistration, String lastDateofRegistration, String firstDateofEvent,
+	protected void setDateDetails(String firstDateofRegistration, String lastDateofRegistration, String firstDateofEvent,
 			String lastDateofEvent) {
 		this.firstDateofRegistration = getFormatedLocalDate(firstDateofRegistration);
 		this.lastDateofRegistration = getFormatedLocalDate(lastDateofRegistration);
@@ -65,7 +66,7 @@ class Event {
 	}
 
 	// 3: Get the details of the event
-	protected void getEventDetails(String eventName, String eventDescription, String eventPriceDetails,
+	protected void setEventDetails(String eventName, String eventDescription, String eventPriceDetails,
 			int eventPricePerPerson, int maxParticipants) {
 		this.eventName = eventName;
 		this.eventDescription = eventDescription;
@@ -75,8 +76,36 @@ class Event {
 	}
 
 	// 4: Get the details of sponsers and participants
-	protected void getParticipantsDetails(Dictionary<String, Long> sponsers, Dictionary<String, Long> participants) {
+	protected void setParticipantsDetails(Dictionary<String, Long> sponsers, Dictionary<String, Long> participants) {
 		this.sponsers = sponsers;
 		this.participants = participants;
+	}
+
+	protected void setParticipantsDetails(Dictionary<String, Long> sponsers) {
+		this.sponsers = sponsers;
+		participants = new Hashtable<String, Long>();
+	}
+
+	// Ticket booking, cancelling and confirm Tickets
+	public boolean bookATicket(String name, long phoneNumber) {
+		if ((participants.size() < maxParticipants) && !confirmTicket(name, phoneNumber)) {
+			participants.put(name, phoneNumber);
+			return true; // successfully
+		}
+		return false; // failed
+	}
+
+	public boolean confirmTicket(String name, long phoneNumber) {
+		if (participants.get(name) == phoneNumber) {
+			return true; // already Available
+		}
+		return false; // not Available
+	}
+
+	public boolean cancelTicket(String name, long phoneNumber) {
+		if (confirmTicket(name, phoneNumber)) {
+			return true; // successfully Cancelled
+		}
+		return false; // not Available
 	}
 }
