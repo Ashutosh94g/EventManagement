@@ -39,15 +39,18 @@ class Event {
 		getParticipantsDetails(sponsers, participants);
 	}
 
+	public Event() {
+	}
+
 	// 1: Get the cast details
-	private void getCastMembers(String organizer, String cooganiser, String[] members) {
+	protected void getCastMembers(String organizer, String cooganiser, String[] members) {
 		this.organizer = organizer;
 		this.cooganiser = cooganiser;
 		this.members = members.clone();
 	}
 
 	// 2: Get the info about dates
-	private void getDateDetails(String firstDateofRegistration, String lastDateofRegistration, String firstDateofEvent,
+	protected void getDateDetails(String firstDateofRegistration, String lastDateofRegistration, String firstDateofEvent,
 			String lastDateofEvent) {
 		this.firstDateofRegistration = getFormatedLocalDate(firstDateofRegistration);
 		this.lastDateofRegistration = getFormatedLocalDate(lastDateofRegistration);
@@ -62,7 +65,7 @@ class Event {
 	}
 
 	// 3: Get the details of the event
-	private void getEventDetails(String eventName, String eventDescription, String eventPriceDetails,
+	protected void getEventDetails(String eventName, String eventDescription, String eventPriceDetails,
 			int eventPricePerPerson, int maxParticipants) {
 		this.eventName = eventName;
 		this.eventDescription = eventDescription;
@@ -72,7 +75,7 @@ class Event {
 	}
 
 	// 4: Get the details of sponsers and participants
-	private void getParticipantsDetails(Dictionary<String, Long> sponsers, Dictionary<String, Long> participants) {
+	protected void getParticipantsDetails(Dictionary<String, Long> sponsers, Dictionary<String, Long> participants) {
 		this.sponsers = sponsers;
 		this.participants = participants;
 	}
