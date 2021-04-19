@@ -2,13 +2,14 @@ package EventManagement;
 
 import java.time.LocalDate;
 import java.util.Dictionary;
+import java.util.HashSet;
 import java.util.Hashtable;
 
 class Event {
 	// Main members of the event
-	public String organizer;
-	public String cooganiser;
-	public String[] members;
+	public Person organizer;
+	public Person cooganiser;
+	public Person[] members;
 
 	// Important dates of the event
 	public LocalDate firstDateofRegistration;
@@ -24,11 +25,11 @@ class Event {
 	public int maxParticipants;
 
 	// Other parties that are involved in the event
-	public Dictionary<String, Long> sponsers; // include name, number and description of sponser
-	public Dictionary<String, Long> participants; // include name and phone number
+	public HashSet sponsers; // include name, number and description of sponser
+	public HashSet participants; // include name and phone number
 
 	// Constructor
-	public Event(String organizer, String cooganiser, String[] members, String firstDateofRegistration,
+	public Event(Person organizer, Person cooganiser, Person[] members, String firstDateofRegistration,
 			String lastDateofRegistration, String firstDateofEvent, String lastDateofEvent, String eventName,
 			String eventDescription, String eventPriceDetails, int eventPricePerPerson, int maxParticipants,
 			Dictionary<String, Long> sponsers, Dictionary<String, Long> participants) {
@@ -44,7 +45,7 @@ class Event {
 	}
 
 	// 1: Get the cast details
-	protected void setCastMembers(String organizer, String cooganiser, String[] members) {
+	protected void setCastMembers(Person organizer, Person cooganiser, Person[] members) {
 		this.organizer = organizer;
 		this.cooganiser = cooganiser;
 		this.members = members.clone();
@@ -76,14 +77,14 @@ class Event {
 	}
 
 	// 4: Get the details of sponsers and participants
-	protected void setParticipantsDetails(Dictionary<String, Long> sponsers, Dictionary<String, Long> participants) {
+	protected void setParticipantsDetails(HashSet<Person> sponsers, HashSet<Person> participants) {
 		this.sponsers = sponsers;
 		this.participants = participants;
 	}
 
-	protected void setParticipantsDetails(Dictionary<String, Long> sponsers) {
+	protected void setParticipantsDetails(HashSet<Person> sponsers) {
 		this.sponsers = sponsers;
-		participants = new Hashtable<String, Long>();
+		participants = new HashSet<Person>();
 	}
 
 	// Ticket booking, cancelling and confirm Tickets
@@ -96,7 +97,7 @@ class Event {
 	}
 
 	public boolean confirmTicket(String name, long phoneNumber) {
-		if (participants.get(name) == phoneNumber) {
+		if (participants(name) == phoneNumber) {
 			return true; // already Available
 		}
 		return false; // not Available
