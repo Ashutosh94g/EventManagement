@@ -5,6 +5,7 @@ import java.util.HashSet;
 // import java.util.Hashtable;
 
 class Event {
+	public boolean isNull = true;
 	// Main members of the event
 	public Person organizer;
 	public Person coorganizer;
@@ -33,6 +34,7 @@ class Event {
 			String eventDescription, String eventPrizeDetails, int eventPricePerPerson, int maxParticipants,
 			HashSet<Person> sponsers) {
 
+		isNull = false;
 		// Calling various private methods
 		setCastMembers(organizer, coorganizer, members);
 		setDateDetails(firstDateofRegistration, lastDateofRegistration, firstDateofEvent, lastDateofEvent);
@@ -82,7 +84,7 @@ class Event {
 	}
 
 	// Ticket booking, cancelling and confirm Tickets
-	public boolean bookATicket(String name, long phoneNumber) {
+	public boolean bookATicket(String name, Long phoneNumber) {
 		if ((participants.size() < maxParticipants) && !confirmTicket(name, phoneNumber)) {
 			participants.add(new Person(name, phoneNumber));
 			return true; // successfully
@@ -90,14 +92,14 @@ class Event {
 		return false; // failed
 	}
 
-	public boolean confirmTicket(String name, long phoneNumber) {
+	public boolean confirmTicket(String name, Long phoneNumber) {
 		if (participants.contains(new Person(name, phoneNumber))) {
 			return true; // already Available
 		}
 		return false; // not Available
 	}
 
-	public boolean cancelTicket(String name, long phoneNumber) {
+	public boolean cancelTicket(String name, Long phoneNumber) {
 		if (confirmTicket(name, phoneNumber)) {
 			participants.remove(new Person(name, phoneNumber));
 			return true; // successfully Cancelled

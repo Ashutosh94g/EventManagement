@@ -4,20 +4,46 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class EventOrganiser {
+	Scanner scanner;
+
 	public static void main(String[] args) {
-		// Event e = new Event();
-		// e.setCastMembers(organizer, coorganizer, members);
+		Event[] events = new Event[5];
+		Event e;
+		EventOrganiser eo = new EventOrganiser();
+		for (int i = 0; i < events.length; i++) {
+			e = new Event();
+			if (events[i] == null) {
+				eo.setEvent(e);
+				System.out.println("Event index in array is " + i);
+				events[i] = e;
+				break;
+			}
+		}
+	}
+
+	EventOrganiser() {
+		scanner = new Scanner(System.in);
+	}
+
+	public Event setEvent(Event e) {
+		System.out.println("---------------------------------------------------------------------");
+		setCastMembersFromUser(e);
+		System.out.println("---------------------------------------------------------------------");
+		setDateDetailsFromUser(e);
+		System.out.println("---------------------------------------------------------------------");
+		setEventDetailsFromUser(e);
+		System.out.println("---------------------------------------------------------------------");
+		setSponsersDetailsFromUser(e);
+		System.out.println("---------------------------------------------------------------------");
+		return e;
 	}
 
 	// 1: Get the cast details from Users
 	public void setCastMembersFromUser(Event e) {
 		Person organizer = getPerson("Organiser's Details: ");
 		Person coorganizer = getPerson("coorganizer's Details: ");
-
-		Scanner numberOfCastMembersScanner = new Scanner(System.in);
 		System.out.print("Enter the remaining number of members: ");
-		int numberOfCastMembers = numberOfCastMembersScanner.nextInt();
-		numberOfCastMembersScanner.close();
+		int numberOfCastMembers = Integer.parseInt(scanner.nextLine());
 		Person[] members = new Person[numberOfCastMembers];
 		for (int i = 0; i < numberOfCastMembers; i++) {
 			members[i] = getPerson("Member number " + (i + 1) + "'s details: ");
@@ -27,15 +53,10 @@ public class EventOrganiser {
 
 	protected Person getPerson(String printText) {
 		System.out.println(printText);
-		Scanner nameScanner = new Scanner(System.in);
-		System.out.print("Enter Name				: ");
-		String name = nameScanner.nextLine();
-		nameScanner.close();
-		Scanner phoneScanner = new Scanner(System.in);
+		System.out.print("Enter Name        : ");
+		String name = scanner.nextLine();
 		System.out.print("Enter Phone Number: ");
-		long phoneNumber = phoneScanner.nextLong();
-		phoneScanner.close();
-
+		Long phoneNumber = Long.parseLong(scanner.nextLine());
 		return new Person(name, phoneNumber);
 	}
 	// 1: END
@@ -50,10 +71,8 @@ public class EventOrganiser {
 	}
 
 	protected String getLocalDateinStringFormat(String printText) {
-		Scanner stringLocalDateScanner = new Scanner(System.in);
 		System.out.print(printText);
-		String date = stringLocalDateScanner.nextLine();
-		stringLocalDateScanner.close();
+		String date = scanner.nextLine();
 		return date;
 	}
 	// 2: END
@@ -69,18 +88,14 @@ public class EventOrganiser {
 	}
 
 	protected String getEventStringDetails(String printText) {
-		Scanner eventDetailScanner = new Scanner(System.in);
-		System.out.println(printText);
-		String eventDetail = eventDetailScanner.nextLine();
-		eventDetailScanner.close();
+		System.out.print(printText);
+		String eventDetail = scanner.nextLine();
 		return eventDetail;
 	}
 
 	protected int getEventIntegerDetails(String printText) {
-		Scanner eventDetailScanner = new Scanner(System.in);
-		System.out.println(printText);
-		int eventDetail = eventDetailScanner.nextInt();
-		eventDetailScanner.close();
+		System.out.print(printText);
+		int eventDetail = Integer.parseInt(scanner.nextLine());
 		return eventDetail;
 	}
 	// 3: END
@@ -97,10 +112,8 @@ public class EventOrganiser {
 	}
 
 	protected int getNumberOfSponsers(String printText) {
-		Scanner numberOfSponsersScanner = new Scanner(System.in);
-		System.out.println(printText);
-		int numberOfSponsors = numberOfSponsersScanner.nextInt();
-		numberOfSponsersScanner.close();
+		System.out.print(printText);
+		int numberOfSponsors = Integer.parseInt(scanner.nextLine());
 		return numberOfSponsors;
 	}
 	// 4: END
