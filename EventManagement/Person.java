@@ -2,10 +2,10 @@ package EventManagement;
 
 class Person {
 	public String name;
-	public long phone;
+	public long phoneNumber;
 
-	public Person(String name, long phone) {
+	public Person(String name, long phoneNumber) {
 		this.name = name;
-		this.phone = phone;
+		this.phoneNumber = phoneNumber;
 	}
 }
