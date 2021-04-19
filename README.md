@@ -1,1 +1,1 @@
-# EventManagement
+# EventManagement using cli
