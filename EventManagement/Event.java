@@ -3,7 +3,7 @@ package EventManagement;
 import java.time.LocalDate;
 import java.util.Dictionary;
 import java.util.HashSet;
-import java.util.Hashtable;
+// import java.util.Hashtable;
 
 class Event {
 	// Main members of the event
@@ -25,8 +25,8 @@ class Event {
 	public int maxParticipants;
 
 	// Other parties that are involved in the event
-	public HashSet sponsers; // include name, number and description of sponser
-	public HashSet participants; // include name and phone number
+	public HashSet<Person> sponsers; // include name, number and description of sponser
+	public HashSet<Person> participants; // include name and phone number
 
 	// Constructor
 	public Event(Person organizer, Person cooganiser, Person[] members, String firstDateofRegistration,
@@ -38,7 +38,7 @@ class Event {
 		setCastMembers(organizer, cooganiser, members);
 		setDateDetails(firstDateofRegistration, lastDateofRegistration, firstDateofEvent, lastDateofEvent);
 		setEventDetails(eventName, eventDescription, eventPriceDetails, eventPricePerPerson, maxParticipants);
-		setParticipantsDetails(sponsers, participants);
+		// setParticipantsDetails(sponsers, participants);
 	}
 
 	public Event() {
@@ -90,14 +90,14 @@ class Event {
 	// Ticket booking, cancelling and confirm Tickets
 	public boolean bookATicket(String name, long phoneNumber) {
 		if ((participants.size() < maxParticipants) && !confirmTicket(name, phoneNumber)) {
-			participants.put(name, phoneNumber);
+			participants.add(new Person(name, phoneNumber));
 			return true; // successfully
 		}
 		return false; // failed
 	}
 
 	public boolean confirmTicket(String name, long phoneNumber) {
-		if (participants(name) == phoneNumber) {
+		if (participants.contains(new Person(name, phoneNumber))) {
 			return true; // already Available
 		}
 		return false; // not Available
@@ -105,8 +105,10 @@ class Event {
 
 	public boolean cancelTicket(String name, long phoneNumber) {
 		if (confirmTicket(name, phoneNumber)) {
+			participants.remove(new Person(name, phoneNumber));
 			return true; // successfully Cancelled
 		}
 		return false; // not Available
 	}
+
 }
