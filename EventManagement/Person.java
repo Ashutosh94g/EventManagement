@@ -8,4 +8,10 @@ class Person {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 	}
+
+	@Override
+	public String toString() {
+		String person = name.substring(0, 1).toUpperCase() + name.substring(1) + ": " + phoneNumber.toString();
+		return String.format(person);
+	}
 }

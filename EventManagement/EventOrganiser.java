@@ -8,15 +8,30 @@ public class EventOrganiser {
 
 	public static void main(String[] args) {
 		Event[] events = new Event[5];
-		Event e;
+		Event e = new Event();
 		EventOrganiser eo = new EventOrganiser();
+		bookAnEvent(events, e, eo);
+		viewAllTheEvents(events);
+	}
+
+	public static boolean bookAnEvent(Event[] events, Event e, EventOrganiser eo) {
 		for (int i = 0; i < events.length; i++) {
-			e = new Event();
 			if (events[i] == null) {
 				eo.setEvent(e);
 				System.out.println("Event index in array is " + i);
 				events[i] = e;
-				break;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void viewAllTheEvents(Event[] events) {
+		for (Event ve : events) {
+			if (ve != null) {
+				ve.toString();
+			} else {
+				return;
 			}
 		}
 	}
@@ -44,9 +59,9 @@ public class EventOrganiser {
 		Person coorganizer = getPerson("coorganizer's Details: ");
 		System.out.print("Enter the remaining number of members: ");
 		int numberOfCastMembers = Integer.parseInt(scanner.nextLine());
-		Person[] members = new Person[numberOfCastMembers];
+		HashSet<Person> members = new HashSet<Person>(numberOfCastMembers);
 		for (int i = 0; i < numberOfCastMembers; i++) {
-			members[i] = getPerson("Member number " + (i + 1) + "'s details: ");
+			members.add(getPerson("Member number " + (i + 1) + "'s details: "));
 		}
 		e.setCastMembers(organizer, coorganizer, members);
 	}

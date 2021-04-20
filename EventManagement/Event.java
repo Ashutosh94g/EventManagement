@@ -5,11 +5,10 @@ import java.util.HashSet;
 // import java.util.Hashtable;
 
 class Event {
-	public boolean isNull = true;
 	// Main members of the event
 	public Person organizer;
 	public Person coorganizer;
-	public Person[] members;
+	public HashSet<Person> members;
 
 	// Important dates of the event
 	public LocalDate firstDateofRegistration;
@@ -29,12 +28,11 @@ class Event {
 	public HashSet<Person> participants; // include name and phone number
 
 	// Constructor
-	public Event(Person organizer, Person coorganizer, Person[] members, String firstDateofRegistration,
+	public Event(Person organizer, Person coorganizer, HashSet<Person> members, String firstDateofRegistration,
 			String lastDateofRegistration, String firstDateofEvent, String lastDateofEvent, String eventName,
 			String eventDescription, String eventPrizeDetails, int eventPricePerPerson, int maxParticipants,
 			HashSet<Person> sponsers) {
 
-		isNull = false;
 		// Calling various private methods
 		setCastMembers(organizer, coorganizer, members);
 		setDateDetails(firstDateofRegistration, lastDateofRegistration, firstDateofEvent, lastDateofEvent);
@@ -46,10 +44,10 @@ class Event {
 	}
 
 	// 1: Get the cast details
-	protected void setCastMembers(Person organizer, Person coorganizer, Person[] members) {
+	protected void setCastMembers(Person organizer, Person coorganizer, HashSet<Person> members) {
 		this.organizer = organizer;
 		this.coorganizer = coorganizer;
-		this.members = members.clone();
+		this.members = members;
 	}
 
 	// 2: Get the info about dates
@@ -105,6 +103,31 @@ class Event {
 			return true; // successfully Cancelled
 		}
 		return false; // not Available
+	}
+
+	@Override
+	public String toString() {
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println(eventName + ": " + eventDescription);
+		System.out.println("Organized by " + organizer.toString() + " and coorganizer by " + coorganizer.toString());
+		System.out.println("From " + firstDateofEvent.toString() + " to " + lastDateofEvent.toString());
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println("Prize details of the event: " + eventPrizeDetails);
+		System.out.println("Sponsered by: ");
+		for (Person sponser : sponsers) {
+			sponser.toString();
+		}
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println("Limited event, only for " + maxParticipants + " people");
+		System.out.println("Book Your tickets for just $" + eventPricePerPerson);
+		System.out.println("from " + firstDateofRegistration.toString() + " to " + lastDateofRegistration.toString());
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println("Thanks to the remaining cast for making this event possible: ");
+		for (Person member : members) {
+			member.toString();
+		}
+		System.out.println("------------------------------------------------------------------------");
+		return super.toString();
 	}
 
 }
