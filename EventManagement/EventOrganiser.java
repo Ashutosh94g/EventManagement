@@ -6,40 +6,9 @@ import java.util.Scanner;
 public class EventOrganiser {
 	Scanner scanner;
 
-	public static void main(String[] args) {
-		// Event[] events = new Event[5];
-		// Event e = new Event();
-		// EventOrganiser eo = new EventOrganiser();
-		// bookAnEvent(events, e, eo);
-		// viewAllTheEvents(events);
-		Test test = new Test();
-		test.run();
-	}
-
-	public static boolean bookAnEvent(Event[] events, Event e, EventOrganiser eo) {
-		for (int i = 0; i < events.length; i++) {
-			if (events[i] == null) {
-				eo.setEvent(e);
-				System.out.println("Event index in array is " + i);
-				events[i] = e;
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static void viewAllTheEvents(Event[] events) {
-		for (Event ve : events) {
-			if (ve != null) {
-				ve.toString();
-			} else {
-				return;
-			}
-		}
-	}
-
-	EventOrganiser() {
-		scanner = new Scanner(System.in);
+	// Start of non-static methods
+	public EventOrganiser(Scanner scanner) {
+		this.scanner = scanner;
 	}
 
 	public Event setEvent(Event e) {
@@ -55,6 +24,7 @@ public class EventOrganiser {
 		return e;
 	}
 
+	// Start of the User Input
 	// 1: Get the cast details from Users
 	public void setCastMembersFromUser(Event e) {
 		Person organizer = getPerson("Organiser's Details: ");
@@ -134,5 +104,4 @@ public class EventOrganiser {
 		return numberOfSponsors;
 	}
 	// 4: END
-
 }
