@@ -7,11 +7,13 @@ public class EventOrganiser {
 	Scanner scanner;
 
 	public static void main(String[] args) {
-		Event[] events = new Event[5];
-		Event e = new Event();
-		EventOrganiser eo = new EventOrganiser();
-		bookAnEvent(events, e, eo);
-		viewAllTheEvents(events);
+		// Event[] events = new Event[5];
+		// Event e = new Event();
+		// EventOrganiser eo = new EventOrganiser();
+		// bookAnEvent(events, e, eo);
+		// viewAllTheEvents(events);
+		Test test = new Test();
+		test.run();
 	}
 
 	public static boolean bookAnEvent(Event[] events, Event e, EventOrganiser eo) {

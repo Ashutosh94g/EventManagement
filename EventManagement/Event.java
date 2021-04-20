@@ -109,13 +109,13 @@ class Event {
 	public String toString() {
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println(eventName + ": " + eventDescription);
-		System.out.println("Organized by " + organizer.toString() + " and coorganizer by " + coorganizer.toString());
+		System.out.println("Organized by " + organizer.toString() + " and coorganized by " + coorganizer.toString());
 		System.out.println("From " + firstDateofEvent.toString() + " to " + lastDateofEvent.toString());
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("Prize details of the event: " + eventPrizeDetails);
 		System.out.println("Sponsered by: ");
 		for (Person sponser : sponsers) {
-			sponser.toString();
+			System.out.println(sponser.toString());
 		}
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("Limited event, only for " + maxParticipants + " people");
@@ -124,7 +124,7 @@ class Event {
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("Thanks to the remaining cast for making this event possible: ");
 		for (Person member : members) {
-			member.toString();
+			System.out.println(member.toString());
 		}
 		System.out.println("------------------------------------------------------------------------");
 		return super.toString();
