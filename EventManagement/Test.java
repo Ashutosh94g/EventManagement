@@ -1,6 +1,7 @@
 package EventManagement;
 
 import java.util.HashSet;
+import java.time.LocalDate;
 
 public class Test {
 	// Main members of the event
@@ -9,10 +10,10 @@ public class Test {
 	public HashSet<Person> members;
 
 	// Important dates of the event
-	public String firstDateofRegistration;
-	public String lastDateofRegistration;
-	public String firstDateofEvent;
-	public String lastDateofEvent;
+	public LocalDate firstDateofRegistration;
+	public LocalDate lastDateofRegistration;
+	public LocalDate firstDateofEvent;
+	public LocalDate lastDateofEvent;
 
 	// Event details
 	public String eventName;
@@ -58,10 +59,10 @@ public class Test {
 
 	public boolean testDateDetails(Event e) {
 		try {
-			firstDateofRegistration = "02/02/2021";
-			lastDateofRegistration = "05/02/2021";
-			firstDateofEvent = "15/02/2021";
-			lastDateofEvent = "20/02/2021";
+			firstDateofRegistration = EventOrganiser.getFormatedLocalDate("02/02/2021");
+			lastDateofRegistration = EventOrganiser.getFormatedLocalDate("05/02/2021");
+			firstDateofEvent = EventOrganiser.getFormatedLocalDate("15/02/2021");
+			lastDateofEvent = EventOrganiser.getFormatedLocalDate("20/02/2021");
 			e.setDateDetails(firstDateofRegistration, lastDateofRegistration, firstDateofEvent, lastDateofEvent);
 			return true;
 		} catch (Exception ex) {

@@ -2,6 +2,7 @@ package EventManagement;
 
 import java.util.HashSet;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class EventOrganiser {
 	Scanner scanner;
@@ -42,11 +43,21 @@ public class EventOrganiser {
 
 	// 2: Get the info about dates from Users
 	public void setDateDetailsFromUser(Event e) {
-		String firstDateofRegistration = getLocalDateinStringFormat("First Date of Registration: ");
-		String lastDateofRegistration = getLocalDateinStringFormat("Last Date Of Registration: ");
-		String firstDateofEvent = getLocalDateinStringFormat("First Date of Event: ");
-		String lastDateofEvent = getLocalDateinStringFormat("Last Date Of Event: ");
+		LocalDate firstDateofRegistration, lastDateofRegistration, firstDateofEvent, lastDateofEvent;
+		do {
+			firstDateofRegistration = getFormatedLocalDate(getLocalDateinStringFormat("First Date of Registration: "));
+			lastDateofRegistration = getFormatedLocalDate(getLocalDateinStringFormat("Last Date Of Registration: "));
+			firstDateofEvent = getFormatedLocalDate(getLocalDateinStringFormat("First Date of Event: "));
+			lastDateofEvent = getFormatedLocalDate(getLocalDateinStringFormat("Last Date Of Event: "));
+			System.out.println("---------------------------------------------------------------------");
+		} while (!(firstDateofRegistration.isBefore(lastDateofRegistration)
+				&& lastDateofRegistration.isBefore(firstDateofEvent) && firstDateofEvent.isBefore(lastDateofEvent)));
 		e.setDateDetails(firstDateofRegistration, lastDateofRegistration, firstDateofEvent, lastDateofEvent);
+	}
+
+	static LocalDate getFormatedLocalDate(String date) {
+		String[] dmy = date.split("/"); // day month year
+		return LocalDate.of(Integer.parseInt(dmy[2]), Integer.parseInt(dmy[1]), Integer.parseInt(dmy[0]));
 	}
 
 	protected String getLocalDateinStringFormat(String printText) {

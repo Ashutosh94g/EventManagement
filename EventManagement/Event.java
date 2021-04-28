@@ -28,8 +28,8 @@ class Event {
 	public HashSet<Person> participants; // include name and phone number
 
 	// Constructor
-	public Event(Person organizer, Person coorganizer, HashSet<Person> members, String firstDateofRegistration,
-			String lastDateofRegistration, String firstDateofEvent, String lastDateofEvent, String eventName,
+	public Event(Person organizer, Person coorganizer, HashSet<Person> members, LocalDate firstDateofRegistration,
+			LocalDate lastDateofRegistration, LocalDate firstDateofEvent, LocalDate lastDateofEvent, String eventName,
 			String eventDescription, String eventPrizeDetails, int eventPricePerPerson, int maxParticipants,
 			HashSet<Person> sponsers) {
 
@@ -51,19 +51,15 @@ class Event {
 	}
 
 	// 2: Get the info about dates
-	protected void setDateDetails(String firstDateofRegistration, String lastDateofRegistration, String firstDateofEvent,
-			String lastDateofEvent) {
-		this.firstDateofRegistration = getFormatedLocalDate(firstDateofRegistration);
-		this.lastDateofRegistration = getFormatedLocalDate(lastDateofRegistration);
-		this.firstDateofEvent = getFormatedLocalDate(firstDateofEvent);
-		this.lastDateofEvent = getFormatedLocalDate(lastDateofEvent);
+	protected void setDateDetails(LocalDate firstDateofRegistration, LocalDate lastDateofRegistration,
+			LocalDate firstDateofEvent, LocalDate lastDateofEvent) {
+		this.firstDateofRegistration = firstDateofRegistration;
+		this.lastDateofRegistration = lastDateofRegistration;
+		this.firstDateofEvent = firstDateofEvent;
+		this.lastDateofEvent = lastDateofEvent;
 	}
 
 	// 2.2: Convert from String to LocalDate
-	private LocalDate getFormatedLocalDate(String date) {
-		String[] dmy = date.split("/"); // day month year
-		return LocalDate.of(Integer.parseInt(dmy[2]), Integer.parseInt(dmy[1]), Integer.parseInt(dmy[0]));
-	}
 
 	// 3: Get the details of the event
 	protected void setEventDetails(String eventName, String eventDescription, String eventPrizeDetails,
