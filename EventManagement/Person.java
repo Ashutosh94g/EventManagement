@@ -15,8 +15,13 @@ class Person {
 		System.out.println(printText);
 		System.out.print("Enter Name        : ");
 		String name = scanner.nextLine();
-		System.out.print("Enter Phone Number: ");
-		Long phoneNumber = Long.parseLong(scanner.nextLine());
+		String phoneString;
+		// Checking if the phone is a number
+		do {
+			System.out.print("Enter Phone Number: ");
+			phoneString = scanner.nextLine();
+		} while (!phoneString.matches("[0-9]+"));
+		Long phoneNumber = Long.parseLong(phoneString);
 		return new Person(name, phoneNumber);
 	}
 
