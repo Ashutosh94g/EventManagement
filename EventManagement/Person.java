@@ -1,5 +1,7 @@
 package EventManagement;
 
+import java.util.Scanner;
+
 class Person {
 	public String name;
 	public Long phoneNumber;
@@ -7,6 +9,15 @@ class Person {
 	public Person(String name, Long phoneNumber) {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
+	}
+
+	static protected Person getPerson(String printText, Scanner scanner) {
+		System.out.println(printText);
+		System.out.print("Enter Name        : ");
+		String name = scanner.nextLine();
+		System.out.print("Enter Phone Number: ");
+		Long phoneNumber = Long.parseLong(scanner.nextLine());
+		return new Person(name, phoneNumber);
 	}
 
 	@Override

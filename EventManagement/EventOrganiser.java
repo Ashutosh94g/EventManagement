@@ -27,25 +27,17 @@ public class EventOrganiser {
 	// Start of the User Input
 	// 1: Get the cast details from Users
 	public void setCastMembersFromUser(Event e) {
-		Person organizer = getPerson("Organiser's Details: ");
-		Person coorganizer = getPerson("coorganizer's Details: ");
+		Person organizer = Person.getPerson("Organiser's Details: ", scanner);
+		Person coorganizer = Person.getPerson("coorganizer's Details: ", scanner);
 		System.out.print("Enter the remaining number of members: ");
 		int numberOfCastMembers = Integer.parseInt(scanner.nextLine());
 		HashSet<Person> members = new HashSet<Person>(numberOfCastMembers);
 		for (int i = 0; i < numberOfCastMembers; i++) {
-			members.add(getPerson("Member number " + (i + 1) + "'s details: "));
+			members.add(Person.getPerson("Member number " + (i + 1) + "'s details: ", scanner));
 		}
 		e.setCastMembers(organizer, coorganizer, members);
 	}
 
-	protected Person getPerson(String printText) {
-		System.out.println(printText);
-		System.out.print("Enter Name        : ");
-		String name = scanner.nextLine();
-		System.out.print("Enter Phone Number: ");
-		Long phoneNumber = Long.parseLong(scanner.nextLine());
-		return new Person(name, phoneNumber);
-	}
 	// 1: END
 
 	// 2: Get the info about dates from Users
@@ -90,10 +82,10 @@ public class EventOrganiser {
 	// 4: Get the details of sponsers
 	public void setSponsersDetailsFromUser(Event e) {
 		int numberOfSponsors = getNumberOfSponsers("Enter Number of sponsers you want to have: ");
-		HashSet<Person> sponsers = new HashSet<Person>();
+		HashSet<Person> sponsers = new HashSet<Person>(numberOfSponsors);
 		System.out.println("Sponser's details: ");
 		for (int i = 0; i < numberOfSponsors; i++) {
-			sponsers.add(getPerson("Sponser number " + (i + 1) + "'s details: "));
+			sponsers.add(Person.getPerson("Sponser number " + (i + 1) + "'s details: ", scanner));
 		}
 		e.setSponsersDetails(sponsers);
 	}
